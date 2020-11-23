@@ -12,9 +12,6 @@ def print_ram(pidid):
         time.sleep(0.1)
 
 nowpid =os.getpid()
-# p = Process(target=print_ram, args=(nowpid,))
-# print(nowpid)
-# p.start()
 
 w = watcher.Watcher(nowpid)
 w.Start()
@@ -37,13 +34,13 @@ input_batch = input_tensor.unsqueeze(0) # create a mini-batch as expected by the
 # if torch.cuda.is_available():
 #     input_batch = input_batch.to('cuda')
 #     model.to('cuda')
-while(1):
-
-    with torch.no_grad():
-        output = model(input_batch)
+with torch.no_grad():
+    output = model(input_batch)
 time.sleep(0.1)
 # Tensor of shape 1000, with confidence scores over Imagenet's 1000 classes
-print(output[0])
+# print(output[0])
 # The output has unnormalized scores. To get probabilities, you can run a softmax on it.
-print(torch.nn.functional.softmax(output[0], dim=0))
-# 
+# print(torch.nn.functional.softmax(output[0], dim=0))
+
+w.Stop()
+print(w.GetMaxRam())
