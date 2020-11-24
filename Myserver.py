@@ -16,15 +16,5 @@ def Readconf(self,path):
 def hello_world(self):
     return 'Hello World!'
 
-    
 
-    
-
-mytest=MyServer('conf.ini')
-
-
-# @mytest.app.route('/helloworld')
-# def hello_world(self):
-#     return 'Hello World!'
-
-mytest.run()
+@app.route('/heart')
