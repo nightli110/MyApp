@@ -3,6 +3,7 @@ import sys
 import psutil
 from collections import OrderedDict
 import pprint
+import json
 
 def getcpuname():
     CPUinfo=OrderedDict()
@@ -23,7 +24,7 @@ def getcpuname():
 
     return CPUinfo['proc0']['model name']
 
-def watchserver(conf):
+def watchserver(use_gpu):
     serverconf={}
     print ("let me look look your computer")
     serverconf['cpu_name']= getcpuname()
@@ -39,6 +40,14 @@ def watchserver(conf):
     return serverconf
 
 
+def readserverconf(confpath):
+    serverjson= json.loads(open(confpath, 'r'))
+    return serverjson
+
+def pingcenter(centerip):
+    pingcmd="ping "+centerip
+    result = os.system(pingcmd)
+    return result
 
 
 

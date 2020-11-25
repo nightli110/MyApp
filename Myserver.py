@@ -3,7 +3,6 @@ import configparser
 from flask import Flask
 
 
-port = 7000
 app = Flask(__name__)
     
 def Readconf(self,path):
@@ -17,4 +16,4 @@ def hello_world(self):
     return 'Hello World!'
 
 
-@app.route('/heart')
+@app.route('/regi')
