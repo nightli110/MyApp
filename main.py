@@ -3,6 +3,7 @@ import psutil
 import sys
 import serverconf
 import Myconf
+import Myserver
 
 if __name__=='main':
     confpath='conf.ini'
@@ -16,5 +17,5 @@ if __name__=='main':
             exit()
         pass
     else:
-        
-     
+        Myserver.app.run()
+        pass
