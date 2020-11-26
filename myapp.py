@@ -1,6 +1,7 @@
 import configparser
 import multiprocessing
 import http
+from Messagequeue import *
 
 class MyApplication(object):
     def __init__(self):
@@ -18,3 +19,5 @@ class MyApplication(object):
     def Isloadmodel(self):
         pass
     
+    def runmodel(self, data):
+

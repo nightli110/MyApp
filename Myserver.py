@@ -38,6 +38,15 @@ def postdata():
         for key in inputnamelist.keys():
             if inputnamelist[key]=="image":
                 data[key]=base64toimageCV(inputnamelist[key])
-        APPMessageQueue.add(data)
+        addsuccess=APPMessagelist.add(data)
+        if addsuccess==None:
+            return messageadderror()
+        uuid= data["uuid"]
+        addsuccess=APPqueuedict.addqueue(uuid)
+        if addsuccess==None:
+            return queueadderror()
+        processdata=APPqueuedict.recvdata(uuid)
+
+    return queueadderror()
         
     pass
