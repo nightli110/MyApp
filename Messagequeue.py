@@ -4,7 +4,7 @@ import os
 
 
 class Messagequeue(object):
-    def __init__(self, maxlen):
+    def __init__(self, maxlen=100):
         self.msglist=multiprocessing.Manager().list()
         self.lock = multiprocessing.RLock()
         self.queuemax = maxlen
@@ -12,7 +12,7 @@ class Messagequeue(object):
     def add(self, message):
         self.lock.acquire()
         addsuccess=True
-        msglen=len(self.meglist)
+        msglen=len(self.msglist)
         if(msglen==self.queuemax):
             addsuccess=False
         else:
@@ -31,6 +31,20 @@ class Messagequeue(object):
         return topmessage
 
     def len(self):
-        pass
+        self.lock.acquire()
+        queuelen=len(self.msglist)
+        self.lock.release()
+        return queuelen
 
-    def 
+    def setqueuelen(self, queuelen):
+        self.lock.acquire()
+        setsuccess= True
+        nowlen= len(self.msglist)
+        if nowlen>queuelen:
+            setsuccess=False
+        else:
+            self.queuemax=queuelen
+        self.lock.release()
+        return setsuccess
+
+APPMessageQueue = Messagequeue()

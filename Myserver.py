@@ -1,6 +1,10 @@
 import os
 import configparser
-from flask import Flask
+from Messagequeue import *
+from flask import Flask, request, jsonify
+from Messageproc import *
+from ImagePretreatment import *
+from errorjson import *
 
 
 app = Flask(__name__)
@@ -24,6 +28,16 @@ def appregister():
 def apponline():
     pass
 
-@app.route('/postdata')
+@app.route('/postdata', methods=["POST"])
 def postdata():
+    if request.method=="POST":
+        data=request.data()
+        inputnamelist=getinputname(data["input"])
+        if inputnamelist==None:
+            return inputerror("input")
+        for key in inputnamelist.keys():
+            if inputnamelist[key]=="image":
+                data[key]=base64toimageCV(inputnamelist[key])
+        APPMessageQueue.add(data)
+        
     pass
