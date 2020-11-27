@@ -8,7 +8,7 @@ def getinputname(strinput):
     strinput=strinput.split(';')
     for item in strinput:
         name_pair=item.split(':')
-        if len(name_pair!=2):
+        if len(name_pair)!=2:
             print('the input is irregular')
             return None
         name_len= int(name_pair[1])

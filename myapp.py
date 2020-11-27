@@ -24,9 +24,11 @@ class MyApplication(object):
         pass
 
 application=MyApplication()
+
 def procedata():
     while(True):
         proceuuid=APPMessagelist.msgqueue.get()
+        print('sss')
         message=APPMessagelist.msgdict[proceuuid]
         application.runmodel()
         p=1

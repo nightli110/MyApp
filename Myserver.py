@@ -4,6 +4,7 @@ from Messagequeue import *
 from flask import Flask, request, jsonify
 from Messageproc import *
 from ImagePretreatment import *
+import time
 import json
 from errorjson import *
 
@@ -36,18 +37,20 @@ def postdata():
         inputnamelist=getinputname(data["input"])
         if inputnamelist==None:
             return inputerror("input")
-        for key in inputnamelist.keys():
-            if inputnamelist[key]=="image":
-                data[key]=base64toimageCV(inputnamelist[key])
-        addsuccess=APPMessagelist.addmsg(data)
-        if addsuccess==None:
-            return messageadderror()
+        # for key in inputnamelist.keys():
+        #     if inputnamelist[key]=="image":
+        #         data[key]=base64toimageCV(inputnamelist[key])
         uuid= data["uuid"]
         addsuccess=APPqueuedict.addqueue(uuid)
         if addsuccess==None:
             return queueadderror()
+        addsuccess=APPMessagelist.addmsg(data)
+        if addsuccess==None:
+            return messageadderror()
+        # time.sleep(0.2)
         processdata=APPqueuedict.recvdata(uuid)
-
+        print('aaa')
+        return "ok"
     return queueadderror()
         
     pass

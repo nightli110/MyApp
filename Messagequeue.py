@@ -90,6 +90,7 @@ class Messagelist(object):
 class Messagequeuedic(object):
     def __init__(self, maxlen=100):
         self.queuedict=multiprocessing.Manager().dict()
+        self.manager = multiprocessing.Manager()
         self.lock = multiprocessing.RLock()
         self.queuedictlenmax = maxlen
     
@@ -109,7 +110,8 @@ class Messagequeuedic(object):
         if (len(self.queuedict)==self.queuedictlenmax):
             addsuccess = False
         else:
-            self.queuedict[uuid]=multiprocessing.Queue()
+            self.queuedict[uuid]=self.manager.Queue()
+            print(self.queuedict.keys())
         self.lock.release()
         return addsuccess
     
@@ -126,15 +128,19 @@ class Messagequeuedic(object):
     def recvdata(self, uuid):
         if uuid not in self.queuedict.keys():
             return None
+        print(self.queuedict[uuid].empty())
         returndata= self.queuedict[uuid].get()
         return returndata
     
     def senddata(self, uuid, message):
         sendsuccess= True
+        print(uuid)
+        print(self.queuedict.keys())
         if uuid not in self.queuedict.keys():
             sendsuccess=False
         else:
-            self.queuedict[uuid].put(message)
+            print(uuid)
+            self.queuedict[uuid].put("ok")
         return sendsuccess
     
 

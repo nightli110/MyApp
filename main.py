@@ -4,6 +4,8 @@ import sys
 import serverconf
 import Myconf
 import Myserver
+import multiprocessing
+import myapp
 
 if __name__=='__main__':
     confpath='conf.ini'
@@ -18,5 +20,6 @@ if __name__=='__main__':
             exit()
         pass
     else:
+        multiprocessing.Process(target=myapp.procedata, args=()).start()
         Myserver.app.run()
         
