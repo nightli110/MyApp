@@ -5,12 +5,13 @@ import serverconf
 import Myconf
 import Myserver
 
-if __name__=='main':
+if __name__=='__main__':
     confpath='conf.ini'
     Myconf = Myconf.Myconf(confpath)
     serverconf=serverconf.watchserver(Myconf.isusegpu())
-
-    if Myconf.usecenter():
+    
+  
+    if int(Myconf.usecenter()):
         pingresult=serverconf.pingcenter(Myconf.getcenterip())
         if not pingresult:
             print('center not ready')
@@ -18,4 +19,4 @@ if __name__=='main':
         pass
     else:
         Myserver.app.run()
-        pass
+        

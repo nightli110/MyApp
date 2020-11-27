@@ -4,6 +4,7 @@ from Messagequeue import *
 from flask import Flask, request, jsonify
 from Messageproc import *
 from ImagePretreatment import *
+import json
 from errorjson import *
 
 
@@ -31,14 +32,14 @@ def apponline():
 @app.route('/postdata', methods=["POST"])
 def postdata():
     if request.method=="POST":
-        data=request.data()
+        data=json.loads(request.get_data())
         inputnamelist=getinputname(data["input"])
         if inputnamelist==None:
             return inputerror("input")
         for key in inputnamelist.keys():
             if inputnamelist[key]=="image":
                 data[key]=base64toimageCV(inputnamelist[key])
-        addsuccess=APPMessagelist.add(data)
+        addsuccess=APPMessagelist.addmsg(data)
         if addsuccess==None:
             return messageadderror()
         uuid= data["uuid"]

@@ -5,43 +5,45 @@ import os
 
 class Messagelist(object):
     def __init__(self, maxlen=100):
-        self.msglist=multiprocessing.Manager().list()
+        self.msgdict=multiprocessing.Manager().dict()
+        self.prodmsg=multiprocessing.Manager().dict()
         self.msgqueue=multiprocessing.Queue()
         self.lock = multiprocessing.RLock()
+        self.finishlock= multiprocessing.RLock()
         self.queuemax = maxlen
 
-    def add(self, message):
+    def addmsg(self, message):
         self.lock.acquire()
         addsuccess=True
-        msglen=len(self.msglist)
+        msglen=len(self.msgdict)
         if(msglen==self.queuemax):
             addsuccess=False
         else:
-            self.msgqueue.put(message[uuid])
-            self.msglist.append(message)
+            self.msgdict[message['uuid']]= message
+            self.msgqueue.put(message["uuid"])
         self.lock.release()
         return addsuccess
 
-    def pop(self):
+    def removemsg(self, uuid):
+        removesuccess= True
         self.lock.acquire()
-        if len(self.msglist)==0:
-            topmessage=None
+        if uuid not in self.msgdict.keys():
+            removesuccess=False
         else:
-            topmessage=self.msglist[0]
-            self.msglist.pop()
+            self.msgdict.popitem(uuid)
         self.lock.release()
-        return topmessage
+        return removesuccess
 
     def len(self):
         self.lock.acquire()
-        queuelen=len(self.msglist)
+        queuelen=len(self.msgdict)
         self.lock.release()
         return queuelen
 
     def setqueuelen(self, queuelen):
         self.lock.acquire()
         setsuccess= True
-        nowlen= len(self.msglist)
+        nowlen= len(self.msgdict)
         if nowlen>queuelen:
             setsuccess=False
         else:
@@ -49,15 +51,41 @@ class Messagelist(object):
         self.lock.release()
         return setsuccess
     
-    def getfront(self):
+    def getmsg(self,uuid):
         self.lock.acquire()
-        if len(self.msglist)==0:
-            topmessage=None
-        else:
-            topmessage=self.msglist[0]
-           
+        topmessage=self.msgdict[uuid]
         self.lock.release()
         return topmessage
+    
+    def prodmsgadd(self,message):
+        addsuccess =True
+        self.finishlock.acquire()
+        uuid=message['uuid']
+        if uuid not in self.prodmsg.keys():
+            self.prodmsg[uuid]=message
+        else:
+            addsuccess=False
+        self.finishlock.release()
+        return addsuccess
+
+    def prodmsgremove(self, uuid):
+        removesuccess= True
+        self.finishlock.acquire()
+        if uuid in self.prodmsg.keys():
+            self.prodmsg.popitem(uuid)
+        else:
+            removesuccess=False
+        self.finishlock.release()
+        return removesuccess
+    
+    def prodmsgisexit(self, uuid):
+        isexit=True
+        self.finishlock.acquire()
+        if uuid not in self.prodmsg.keys():
+            isexit=False
+        self.finishlock.release()
+        return isexit
+
 
 class Messagequeuedic(object):
     def __init__(self, maxlen=100):
@@ -100,6 +128,14 @@ class Messagequeuedic(object):
             return None
         returndata= self.queuedict[uuid].get()
         return returndata
+    
+    def senddata(self, uuid, message):
+        sendsuccess= True
+        if uuid not in self.queuedict.keys():
+            sendsuccess=False
+        else:
+            self.queuedict[uuid].put(message)
+        return sendsuccess
     
 
 APPMessagelist = Messagelist()
