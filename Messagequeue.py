@@ -111,7 +111,6 @@ class Messagequeuedic(object):
             addsuccess = False
         else:
             self.queuedict[uuid]=self.manager.Queue()
-            print(self.queuedict.keys())
         self.lock.release()
         return addsuccess
     
@@ -128,19 +127,16 @@ class Messagequeuedic(object):
     def recvdata(self, uuid):
         if uuid not in self.queuedict.keys():
             return None
-        print(self.queuedict[uuid].empty())
         returndata= self.queuedict[uuid].get()
         return returndata
     
     def senddata(self, uuid, message):
         sendsuccess= True
-        print(uuid)
-        print(self.queuedict.keys())
+
         if uuid not in self.queuedict.keys():
             sendsuccess=False
         else:
-            print(uuid)
-            self.queuedict[uuid].put("ok")
+            self.queuedict[uuid].put(message)
         return sendsuccess
     
 
