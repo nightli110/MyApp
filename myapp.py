@@ -3,25 +3,47 @@ import multiprocessing
 import http
 from Messagequeue import *
 import time
-class MyApplication(object):
+import cv2
+import gc
+##caffeexample
+class MyApplication():
     def __init__(self):
-        self.hasmodel = multiprocessing.Manager().Value('i', 0)
+        self.modellable=False
+        self.lock=multiprocessing.RLock()
+        self.net=cv2.dnn.readNetFromCaffe(prototxt, model)
         pass
 
 
-    def loadmodel(self, path):
+    def loadmodel(self, prototxt, model):
+        self.lock.acquire()
+        self.net = cv2.dnn.readNetFromCaffe(prototxt, model)
+        self.modellable=True
+        self.lock.release()
         
-        pass
 
-    def dumpmodel(self):
-        pass
+    def uloadmodel(self):
+        self.lock.acquire()
+        del self.net
+        gc.collect()
+        self.modellable=False
+        self.lock.release()
+        
 
     def Isloadmodel(self):
-        pass
+        return self.modellable
+        
     
     def runmodel(self, data=None):
-        print('runmodel')
-        pass
+        self.lock.acquire()
+        if not self.Isloadmodel():
+            self.lock.release()
+            print("nomodel load plase load model first")
+        self.net.setInput(data)
+        netoutput=self.net.forward()
+        self.lock.release()
+        return netoutput
+
+        
 
 application=MyApplication()
 
@@ -30,7 +52,6 @@ def procedata():
         proceuuid=APPMessagelist.msgqueue.get()
         message=APPMessagelist.msgdict[proceuuid]
         application.runmodel()
-        p=1
         outputsuccess=APPMessagelist.prodmsgadd(message)
         time.sleep(0.1)
         APPqueuedict.senddata(proceuuid, message)
