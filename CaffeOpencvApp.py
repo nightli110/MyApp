@@ -17,9 +17,9 @@ class MyApplication(BaseApplication):
 
     def loadmodel(self, prototxt, model):
         self.lock.acquire()
-        if self.modellable==0:
+        if self.modellable.value==0:
             self.net = cv2.dnn.readNetFromCaffe(prototxt, model)
-            self.modellable=1
+            self.modellable.value=1
             self.loadlabel.set(True)
         else:
             print("model has be load, unload first")
@@ -30,17 +30,21 @@ class MyApplication(BaseApplication):
         self.lock.acquire()
         del self.net
         gc.collect()
-        self.modellable=0
+        self.modellable.value=0
         self.lock.release()
     
     def unloadmodel(self):
         self.lock.acquire()
-        self.modellable=0
+        self.modellable.value=0
         self.lock.release()
         
 
     def Isloadmodel(self):
-        return self.modellable
+        if self.modellable.value==0:
+            return False
+        else:
+            return True
+
         
     
     def inferdata(self, data=None):
@@ -69,14 +73,17 @@ class MyApplication(BaseApplication):
                     netoutput=self.inferdata(message)
                     outputsuccess=APPMessagelist.prodmsgadd(message)
                     APPqueuedict.senddata(proceuuid, message)
-                    if (self.modellable==0):
+                    if (self.modellable.value==0):
                         self.gcmodel()
                         break
     
 
-        
-
-        
-
 application=MyApplication()
-        
+
+def modelinnet():
+    if (application.Isloadmodel()==0):
+        return False
+    else:
+        return True
+    
+

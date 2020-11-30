@@ -7,7 +7,7 @@ from ImagePretreatment import *
 import time
 import json
 from ErrorJson import *
-
+from CaffeOpencvApp import*
 ####
 import cv2
 
@@ -29,8 +29,14 @@ def hello_world():
 def appregister():
     pass
 
-@app.route('/online')
+@app.route('/online', methods=["POST"])
 def apponline():
+    if request.method=="POST":
+        data= json.loads(request.get_data())
+        if data['loadmodel']==True:
+            
+            application.loadmodel()
+
     pass
 
 @app.route('/postdata', methods=["POST"])
@@ -43,6 +49,8 @@ def postdata():
         # for key in inputnamelist.keys():
         #     if inputnamelist[key]=="image":
         #         data[key]=base64toimageCV(inputnamelist[key])
+        if not modelinnet():
+            return nomodelerror()
         uuid= data["uuid"]
         addsuccess=APPqueuedict.addqueue(uuid)
         img=cv2.imread('dog.jpg')
