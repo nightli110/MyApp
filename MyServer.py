@@ -8,6 +8,9 @@ import time
 import json
 from ErrorJson import *
 
+####
+import cv2
+
 
 app = Flask(__name__)
     
@@ -42,12 +45,14 @@ def postdata():
         #         data[key]=base64toimageCV(inputnamelist[key])
         uuid= data["uuid"]
         addsuccess=APPqueuedict.addqueue(uuid)
+        img=cv2.imread('dog.jpg')
+        data['img']=img
         if addsuccess==None:
             return queueadderror()
         addsuccess=APPMessagelist.addmsg(data)
         if addsuccess==None:
             return messageadderror()
-        # time.sleep(0.2)
+        time.sleep(0.2)
         processdata=APPqueuedict.recvdata(uuid)
         print('aaa')
         return "ok"
