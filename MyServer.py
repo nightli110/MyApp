@@ -1,12 +1,12 @@
 import os
 import configparser
-from Messagequeue import *
+from MessageQueue import *
 from flask import Flask, request, jsonify
-from Messageproc import *
+from MessageProc import *
 from ImagePretreatment import *
 import time
 import json
-from errorjson import *
+from ErrorJson import *
 
 
 app = Flask(__name__)

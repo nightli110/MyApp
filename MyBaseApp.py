@@ -1,7 +1,7 @@
 import configparser
 import multiprocessing
 import http
-from Messagequeue import *
+from MessageQueue import *
 import time
 import cv2
 import gc
