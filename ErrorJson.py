@@ -38,6 +38,12 @@ def nomodelerror():
     errjson= json.dumps(errdic)
     return errjson
 
+def exitmodelerror():
+    errormessage= "model has in network， please unload first"
+    errdic={"30002":errormessage}
+    errjson= json.dumps(errdic)
+    return errjson
+
 
 def conferr(name):
     errormessage="conf file in section: "+name+" error"

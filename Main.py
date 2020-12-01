@@ -11,6 +11,7 @@ if __name__=='__main__':
     confpath='Conf.ini'
     Myconf = MyConf.Myconf(confpath)
     serverconf=ServerConf.watchserver(Myconf.isusegpu())
+    MyServer.app.config['Myconf']=Myconf
     
   
     if int(Myconf.usecenter()):
@@ -20,6 +21,6 @@ if __name__=='__main__':
             exit()
         pass
     else:
-        multiprocessing.Process(target=application.runmodel, args=()).start()
+        multiprocessing.Process(target=application.runnet, args=()).start()
         MyServer.app.run()
         

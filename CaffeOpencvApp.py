@@ -11,19 +11,26 @@ class MyApplication(BaseApplication):
         self.modellable=multiprocessing.Value('b', 0)
         self.lock=multiprocessing.RLock()
         self.loadlabel=multiprocessing.Queue()
+        self.manager=multiprocessing.Manager().dict()
         
         pass
 
 
-    def loadmodel(self, prototxt, model):
+    def loadmodel(self, netframe,modelfile):
+        loadsuccess=True
         self.lock.acquire()
         if self.modellable.value==0:
-            self.net = cv2.dnn.readNetFromCaffe(prototxt, model)
-            self.modellable.value=1
-            self.loadlabel.set(True)
+            if netframe=="caffe":
+                # net = cv2.dnn.readNetFromCaffe(modelfile[0], modelfile[1])
+                # self.manager['net']=net
+                self.modellable.value=1
+                self.loadlabel.put(modelfile)
+                time.sleep(1)
         else:
             print("model has be load, unload first")
+            loadsuccess=False
         self.lock.release()
+        return loadsuccess
         
 
     def gcmodel(self):
@@ -45,15 +52,16 @@ class MyApplication(BaseApplication):
         else:
             return True
 
-        
-    
     def inferdata(self, data=None):
         self.lock.acquire()
+        netoutput=None
         if not self.Isloadmodel():
-            self.lock.release()
             print("nomodel load plase load model first")
-        self.net.setInput(data)
-        netoutput=self.net.forward()
+        else:
+            self.net.setInput(data)
+            netoutput=self.net.forward()
+        # self.net.setInput(data)
+        # netoutput=self.net.forward()
         self.lock.release()
         return netoutput
         
@@ -64,18 +72,24 @@ class MyApplication(BaseApplication):
 
     def runnet(self):
         while(True):
-            loadmodellabel=self.loadlabel.get()
-            if loadmodellabel==True:
+            time.sleep(1)
+            modelfile=self.loadlabel.get()
+            modelfile=('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+            self.net=cv2.dnn.readNetFromCaffe(modelfile[0], modelfile[1])
+            print(modelfile)
+            if self.modellable.value==1:
+            # if True:
                 while(True):
+                    time.sleep(1)
                     proceuuid=APPMessagelist.msgqueue.get()
                     message=APPMessagelist.msgdict[proceuuid]
                     netinput=self.advanceproc(message['img'])
-                    netoutput=self.inferdata(message)
+                    netoutput=self.inferdata(netinput)
                     outputsuccess=APPMessagelist.prodmsgadd(message)
                     APPqueuedict.senddata(proceuuid, message)
-                    if (self.modellable.value==0):
-                        self.gcmodel()
-                        break
+                    # if (self.modellable.value==0):
+                    #     self.gcmodel()
+                    #     break
     
 
 application=MyApplication()

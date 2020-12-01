@@ -8,6 +8,7 @@ import time
 import json
 from ErrorJson import *
 from CaffeOpencvApp import*
+from RequestProc import*
 ####
 import cv2
 
@@ -34,12 +35,13 @@ def apponline():
     if request.method=="POST":
         data= json.loads(request.get_data())
         if data['loadmodel']==True:
-            
-            application.loadmodel()
+            modelfile=getnetframe(app.config['Myconf'])
+            loadsuccess=application.loadmodel(app.config['Myconf'].getoption('netconf', 'netframe'),modelfile)
+            return "model online success"
+        else:
+            return exitmodelerror()
 
-    pass
-
-@app.route('/postdata', methods=["POST"])
+@app.route('/postdata', methods=["POST"]) 
 def postdata():
     if request.method=="POST":
         data=json.loads(request.get_data())
@@ -47,10 +49,10 @@ def postdata():
         if inputnamelist==None:
             return inputerror("input")
         # for key in inputnamelist.keys():
-        #     if inputnamelist[key]=="image":
+        #     if inputnamelist[key]=="image"   :
         #         data[key]=base64toimageCV(inputnamelist[key])
-        if not modelinnet():
-            return nomodelerror()
+        # if not modelinnet():
+        #     return nomodelerror()
         uuid= data["uuid"]
         addsuccess=APPqueuedict.addqueue(uuid)
         img=cv2.imread('dog.jpg')
@@ -62,7 +64,6 @@ def postdata():
             return messageadderror()
         time.sleep(0.2)
         processdata=APPqueuedict.recvdata(uuid)
-        print('aaa')
         return "ok"
     return queueadderror()
         
