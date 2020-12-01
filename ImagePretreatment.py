@@ -20,5 +20,8 @@ def base64toimagePIL(b64code):
     image = io.BytesIO(img_64decode)
     
     img = Image.open(image)
-
     return img
+
+def drawrectangle(img,detections):
+    confidence = detections[0, 0, i, 2]
+    pass

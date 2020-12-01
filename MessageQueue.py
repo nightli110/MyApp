@@ -3,6 +3,7 @@ import json
 import os
 
 
+###消息队列，msgdict 未处理消息，prodmsg处理完消息，msgqueue消息处理顺序队列
 class Messagelist(object):
     def __init__(self, maxlen=100):
         self.msgdict=multiprocessing.Manager().dict()
@@ -57,6 +58,7 @@ class Messagelist(object):
         self.lock.release()
         return topmessage
     
+    #prod* 已处理消息操作
     def prodmsgadd(self,message):
         addsuccess =True
         self.finishlock.acquire()
@@ -87,6 +89,8 @@ class Messagelist(object):
         return isexit
 
 
+###messagequene 消息queue类，通过监听对应uuid的queue获取消息是否处理完毕
+###
 class Messagequeuedic(object):
     def __init__(self, maxlen=100):
         self.queuedict=multiprocessing.Manager().dict()
