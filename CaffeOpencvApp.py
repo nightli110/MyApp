@@ -43,6 +43,7 @@ class MyApplication(BaseApplication):
             return False
         else:
             return True
+            
     ##卸载模型
     def unloadmodel(self):
         self.lock.acquire()
@@ -80,7 +81,7 @@ class MyApplication(BaseApplication):
         return netoutput
         
 
-    #推理线程函数
+    #推理进程函数
     def runnet(self):
         while(True):
             time.sleep(1)
