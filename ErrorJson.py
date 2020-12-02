@@ -1,5 +1,4 @@
-#TODO 
-#errorcode 
+
 import json
 
 #1****:服务相关的
@@ -15,6 +14,7 @@ Errordic={
     30001:      "no model in network",
     30002:      "model has in network， please unload first",
     40001:      "the config option %s format is error",
+    40002:      "the %s option is empty"
 }
 
 def jsonerrorcode(code, key=None):
@@ -27,44 +27,3 @@ def jsonerrorcode(code, key=None):
                 "message":errmessage}
     jsonerror=json.dumps(jsonerror)
     return jsonerror
-
-
-def inputerror(key):
-    errormessage="the "+key+ " format is error"
-    errdic={"10001":errormessage}
-    errjson= json.dumps(errdic)
-    return errjson
-
-
-def messageadderror():
-    errormessage= "the messagequeue add error"
-    errdic={"20001":errormessage}
-    errjson= json.dumps(errdic)
-    return errjson
-
-def queueadderror():
-    errormessage= "the queue add error"
-    errdic={"20002":errormessage}
-    errjson= json.dumps(errdic)
-    return errjson
-
-def nomodelerror():
-    errormessage= "no model in network"
-    errdic={"30001":errormessage}
-    errjson= json.dumps(errdic)
-    return errjson
-
-
-
-def exitmodelerror():
-    errormessage= "model has in network， please unload first"
-    errdic={"30002":errormessage}
-    errjson= json.dumps(errdic)
-    return errjson
-
-
-def conferr(name):
-    errormessage="conf file in section: "+name+" error"
-    errdic={"40001":errormessage}
-    errjson=json.dumps(errdic)
-    return errjson

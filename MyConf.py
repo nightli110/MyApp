@@ -14,6 +14,7 @@ class Myconf(object):
             return None
 
     def getoption(self, section, option):
+        
         if self.conf.has_option(section, option):
             return self.conf.get(section, option)
         else:

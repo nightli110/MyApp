@@ -1,6 +1,7 @@
 import cv2
 import gc
 import multiprocessing
+from MyConf import*
 
 from MyBaseApp import*
 
@@ -21,6 +22,10 @@ class MyApplication(BaseApplication):
         self.manager=multiprocessing.Manager().dict()
         
         pass
+
+    ##获取全局配置
+    def setglobalconf(self,conf):
+        self.globalconf=conf
 
     #加载模型
     def loadmodel(self, netframe,modelfile):
@@ -43,7 +48,7 @@ class MyApplication(BaseApplication):
             return False
         else:
             return True
-            
+
     ##卸载模型
     def unloadmodel(self):
         self.lock.acquire()
@@ -63,10 +68,6 @@ class MyApplication(BaseApplication):
         frame_resized=cv2.resize(frame,(300,300))
         blob = cv2.dnn.blobFromImage(frame_resized, 0.007843, (300, 300), (127.5, 127.5, 127.5), False)
         return blob
-
-    ##对推理结果进行处理
-    def resultsproc(self,data):
-        pass
 
     ##对数据进行推理
     def inferdata(self, data=None):
@@ -102,6 +103,25 @@ class MyApplication(BaseApplication):
                         self.gcmodel()
                         break
     
+    ##对推理结果进行处理
+    def resultsproc(self,data):
+        for i in range(data.shape[2]):
+            confidence = data[0,0,i,2]
+            if confidence>0.2:
+                class_id = int(data[0,0,i,1])
+
+                rows=self.globalconf.getoption('image_1', 'rows')
+                cols=self.globalconf.getoption('image-1','cols')
+                if rows==None or cols==None:
+                    return None
+                xLeftBottom = int(data[0,0,i,3]*cols)
+                yLeftBottom = int(data[0, 0, i, 4]*rows)
+                xRightTop = int(data[0,0,i,5]*cols)
+                yRightTop = int(data[0,])
+
+
+
+        pass
 
 application=MyApplication()
 

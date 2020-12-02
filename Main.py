@@ -12,7 +12,7 @@ if __name__=='__main__':
     Myconf = MyConf.Myconf(confpath)
     serverconf=ServerConf.watchserver(Myconf.isusegpu())
     MyServer.app.config['Myconf']=Myconf
-    
+    application.setglobalconf(Myconf)
   
     if int(Myconf.usecenter()):
         pingresult=ServerConf.pingcenter(Myconf.getcenterip())
