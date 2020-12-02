@@ -97,6 +97,7 @@ class MyApplication(BaseApplication):
                     message=APPMessagelist.msgdict[proceuuid]
                     netinput=self.advanceproc(message['img'])
                     netoutput=self.inferdata(netinput)
+
                     outputsuccess=APPMessagelist.prodmsgadd(netoutput)
                     APPqueuedict.senddata(proceuuid, message)
                     if (self.modellable.value==0):
@@ -104,7 +105,9 @@ class MyApplication(BaseApplication):
                         break
     
     ##对推理结果进行处理
-    def resultsproc(self,data):
+    def resultsproc(self,data,img):
+        message={}
+        lablelist=[]
         for i in range(data.shape[2]):
             confidence = data[0,0,i,2]
             if confidence>0.2:
@@ -117,11 +120,33 @@ class MyApplication(BaseApplication):
                 xLeftBottom = int(data[0,0,i,3]*cols)
                 yLeftBottom = int(data[0, 0, i, 4]*rows)
                 xRightTop = int(data[0,0,i,5]*cols)
-                yRightTop = int(data[0,])
+                yRightTop = int(data[0,0, i, 6]*rows)
 
+                widthFactor = img.shape[0]/cols
+                heightFactor = img.shape[1]/rows
 
+                xLeftBottom_ = int(widthFactor*xLeftBottom)
+                yLeftBottom_ = int(heightFactor*yLeftBottom)
+                xRightTop_ = int(widthFactor*xRightTop)
+                yRightTop_ = int(heightFactor*yRightTop)
 
-        pass
+                cv2.rectangle(img,(xLeftBottom_, yLeftBottom_),(xRightTop_, yRightTop_))
+
+                if class_id in classNames:
+                    label = classNames[class_id]+"： "+str(confidence)
+                    lablelist.append((label, [xLeftBottom_, yLeftBottom_, xRightTop_, yRightTop_]))
+
+                    labelSize, baseLine = cv2.getTextSize(label, cv2.FONT_HERSHEY_TRIPLEX, 0.8, 1)
+
+                    cv2.rectangle(img, (xLeftBottom_, yLeftBottom_ - labelSize[1]),
+                                 (xLeftBottom_ + labelSize[0], yLeftBottom_ + baseLine),
+                                 (255, 255, 255), cv2.FILLED)
+                    cv2.putText(img, label, (xLeftBottom_, yLeftBottom_),
+                        cv2.FONT_HERSHEY_TRIPLEX, 0.8, (0, 0, 0))
+        message['image_1']=img
+        message['text_1']=lablelist
+        return message
+
 
 application=MyApplication()
 
