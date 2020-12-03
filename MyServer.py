@@ -8,6 +8,7 @@ import time
 import json
 from ErrorJson import *
 from CaffeOpencvApp import*
+import logging
 
 ####
 import cv2

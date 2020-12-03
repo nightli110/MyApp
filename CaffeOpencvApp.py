@@ -4,6 +4,7 @@ import multiprocessing
 from MyConf import*
 
 from MyBaseApp import*
+import logging
 
 
 ##caffeexample
@@ -20,6 +21,7 @@ class MyApplication(BaseApplication):
         self.lock=multiprocessing.RLock()
         self.loadlabel=multiprocessing.Queue()
         self.manager=multiprocessing.Manager().dict()
+        self.logger=logging.getLogger('log02')
         
         pass
 
@@ -84,6 +86,7 @@ class MyApplication(BaseApplication):
 
     #推理进程函数
     def runnet(self):
+        self.logger.info("infer process start succeed")
         while(True):
             time.sleep(1)
             modelfile=self.loadlabel.get()
