@@ -14,7 +14,7 @@ def base64toimageCV(b64code):
 
     return img
 
-#base64code to 
+#base64code to PIL
 def base64toimagePIL(b64code):
     img_64decode = base64.b64decode(b64code)
     image = io.BytesIO(img_64decode)
@@ -26,8 +26,8 @@ def base64toimagePIL(b64code):
 #     confidence = detections[0, 0, i, 2]
 #     pass
 
+#OPENCV:imagetobase64
 def imgetobase64(img):
     image = cv2.imencode('.jpg',image_np)[1]
     image_code = str(base64.b64encode(image))[2:-1]
- 
     return image_code
