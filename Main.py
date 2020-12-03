@@ -6,13 +6,19 @@ import MyConf
 import MyServer
 import multiprocessing
 from CaffeOpencvApp import*
+import logging
+from MyLog import Mylog
+
+
 
 if __name__=='__main__':
-    confpath='Conf.ini'
-    Myconf = MyConf.Myconf(confpath)
+    configpath='./config/config.ini'
+    Myconf = MyConf.Myconf(configpath)
     serverconf=ServerConf.watchserver(Myconf.isusegpu())
     MyServer.app.config['Myconf']=Myconf
     application.setglobalconf(Myconf)
+    Mylog.initlog(Myconf)
+    
   
     if int(Myconf.usecenter()):
         pingresult=ServerConf.pingcenter(Myconf.getcenterip())

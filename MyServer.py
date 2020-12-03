@@ -8,7 +8,7 @@ import time
 import json
 from ErrorJson import *
 from CaffeOpencvApp import*
-from RequestProc import*
+
 ####
 import cv2
 
@@ -43,7 +43,7 @@ def apponline():
             else:
                 return jsonerrorcode(30002)
         elif data['loadmodel']==False:
-            if not application.Isloadmodel()
+            if not application.Isloadmodel():
                 application.unloadmodel()
                 return "model offline success"
             else:
