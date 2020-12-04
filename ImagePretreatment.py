@@ -22,12 +22,9 @@ def base64toimagePIL(b64code):
     img = Image.open(image)
     return img
 
-# def drawrectangle(img,detections):
-#     confidence = detections[0, 0, i, 2]
-#     pass
 
 #OPENCV:imagetobase64
 def imgetobase64(img):
-    image = cv2.imencode('.jpg',image_np)[1]
+    image = cv2.imencode('.jpg',img)[1]
     image_code = str(base64.b64encode(image))[2:-1]
     return image_code

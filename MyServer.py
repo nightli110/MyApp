@@ -77,5 +77,5 @@ def postdata():
             return jsonerrorcode(20001)
         time.sleep(0.2)
         processdata=APPqueuedict.recvdata(uuid)
-        return "ok"
+        return json.dumps(processdata)
         

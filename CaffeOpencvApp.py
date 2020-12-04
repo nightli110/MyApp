@@ -4,6 +4,7 @@ import multiprocessing
 from MyConf import*
 
 from MyBaseApp import*
+from ImagePretreatment import*
 import logging
 
 
@@ -106,10 +107,10 @@ class MyApplication(BaseApplication):
                     netinput=self.advanceproc(message['img'])
                     netoutput=self.inferdata(netinput)
                     resultdata=self.resultsproc(netoutput, message['img'])
-                    cv2.imwrite('test.jpg', resultdata['image_1'])
+                    # cv2.imwrite('test.jpg', resultdata['image_1'])
                     message['result']=resultdata
                     outputsuccess=APPMessagelist.prodmsgadd(message)
-                    APPqueuedict.senddata(proceuuid, message)
+                    APPqueuedict.senddata(proceuuid, resultdata)
                     if (self.modellable.value==0):
                         self.gcmodel()
                         break
@@ -155,7 +156,8 @@ class MyApplication(BaseApplication):
                                  (255, 255, 255), cv2.FILLED)
                     cv2.putText(img, label, (xLeftBottom_, yLeftBottom_),
                         cv2.FONT_HERSHEY_TRIPLEX, 0.8, (0, 0, 0))
-        message['image_1']=img
+        imgcode = imgetobase64(img)
+        message['image_1']=imgcode
         message['text_1']=lablelist
         return message
 
