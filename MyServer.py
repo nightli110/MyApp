@@ -15,20 +15,15 @@ import cv2
 
 
 app = Flask(__name__)
-    
-def Readconf(path):
-    config = configparser.ConfigParser()
-    config.read(path)
-    port = config.get('server','port')
-    return port
-
 @app.route('/helloworld')
 def hello_world():
+    logger.info('Hello World!')
     return 'Hello World!'
 
 
 @app.route('/register')
 def appregister():
+    logger.info('TianDao is not completed, it int not allowed.')
     pass
 
 #上下线
@@ -36,16 +31,19 @@ def appregister():
 def apponline():
     if request.method=="POST":
         data= json.loads(request.get_data())
+        logger.info('get data message, the data keys: '+str(data.keys()))
         if data['loadmodel']==True:
             if not application.Isloadmodel():
                 modelfile=getnetframe(app.config['Myconf'])
                 loadsuccess=application.loadmodel(app.config['Myconf'].getoption('netconf', 'netframe'),modelfile)
+                logger.info("model online success")
                 return "model online success"
             else:
                 return jsonerrorcode(30002)
         elif data['loadmodel']==False:
             if not application.Isloadmodel():
                 application.unloadmodel()
+                logger.info("model offline success")
                 return "model offline success"
             else:
                 return jsonerrorcode(30001)
@@ -57,9 +55,12 @@ def apponline():
 def postdata():
     if request.method=="POST":
         data=json.loads(request.get_data())
+        logdata=postdatatolog(data)
+        if logdata==None: 
+            return jsonerrorcode(10001, 'uuid and input')
+        else:
+            logger.info("get data: "+logdata)
         inputnamelist=getinputname(data["input"])
-        if inputnamelist==None:
-            return inputerror("input")
         # for key in inputnamelist.keys():
         #     if inputnamelist[key]=="image"   :
         #         data[key]=base64toimageCV(inputnamelist[key])

@@ -63,7 +63,9 @@ def netoutputtomessage(netoutput):
             print("not support now")
     return json.loads(message)
 
-            
-
-
-
+def postdatatolog(data):
+    returnstr=""
+    if "uuid" in data.keys() and "input" in data.keys():
+        returnstr="uuid: "+data["uuid"]+";"+"input: "+data["input"] +' '
+    return returnstr
+    

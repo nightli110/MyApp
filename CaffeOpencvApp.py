@@ -39,7 +39,7 @@ class MyApplication(BaseApplication):
                 self.loadlabel.put(modelfile)
                 time.sleep(1)
         else:
-            print("model has be load, unload first")
+            self.logger.error("model has be load, unload first")
             loadsuccess=False
         self.lock.release()
         return loadsuccess
@@ -76,7 +76,7 @@ class MyApplication(BaseApplication):
         self.lock.acquire()
         netoutput=None
         if not self.Isloadmodel():
-            print("nomodel load plase load model first")
+            self.logger.error("nomodel load plase load model first")
         else:
             self.net.setInput(data)
             netoutput=self.net.forward()
@@ -85,6 +85,7 @@ class MyApplication(BaseApplication):
         
 
     #推理进程函数
+    #TODO 判断模型加载完全
     def runnet(self):
         self.logger.info("infer process start succeed")
         while(True):
@@ -92,7 +93,7 @@ class MyApplication(BaseApplication):
             modelfile=self.loadlabel.get()
             modelfile=('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
             self.net=cv2.dnn.readNetFromCaffe(modelfile[0], modelfile[1])
-            print(modelfile)
+            self.logger.info('model has load'+str(modelfile))
             if self.modellable.value==1:
                 while(True):
                     time.sleep(1)

@@ -4,3 +4,5 @@ infer process start succeed
 infer process start succeed
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 infer process start succeed
+[2020-12-04 13:39:51] _internal.py[line:113] INFO 2961  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-12-04 13:39:51] CaffeOpencvApp.py[line:89] INFO 2994 infer process start succeed

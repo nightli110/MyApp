@@ -1,5 +1,6 @@
 
 import json
+import logging
 
 #1****:服务相关的
 #2****:消息队列相关的
@@ -17,6 +18,7 @@ Errordic={
     40002:      "the %s option is empty"
 }
 
+logger=logging.getLogger('log02')
 def jsonerrorcode(code, key=None):
     errmessage=None
     if key !=None:
@@ -26,4 +28,5 @@ def jsonerrorcode(code, key=None):
     jsonerror={"code":code,
                 "message":errmessage}
     jsonerror=json.dumps(jsonerror)
+    logger.error(jsonerror)
     return jsonerror
