@@ -91,7 +91,11 @@ class MyApplication(BaseApplication):
         while(True):
             time.sleep(1)
             modelfile=self.loadlabel.get()
-            modelfile=('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+            self.logger.info("load modelfile: "+str(modelfile))
+            #modelfile=('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+            for i in modelfile:
+                if not os.path.exists(i):
+                    self.logger.error("model weight not exit")
             self.net=cv2.dnn.readNetFromCaffe(modelfile[0], modelfile[1])
             self.logger.info('model has load'+str(modelfile))
             if self.modellable.value==1:
@@ -101,8 +105,10 @@ class MyApplication(BaseApplication):
                     message=APPMessagelist.msgdict[proceuuid]
                     netinput=self.advanceproc(message['img'])
                     netoutput=self.inferdata(netinput)
-
-                    outputsuccess=APPMessagelist.prodmsgadd(netoutput)
+                    resultdata=self.resultsproc(netoutput, message['img'])
+                    cv2.imwrite('test.jpg', resultdata['image_1'])
+                    message['result']=resultdata
+                    outputsuccess=APPMessagelist.prodmsgadd(message)
                     APPqueuedict.senddata(proceuuid, message)
                     if (self.modellable.value==0):
                         self.gcmodel()
@@ -118,9 +124,11 @@ class MyApplication(BaseApplication):
                 class_id = int(data[0,0,i,1])
 
                 rows=self.globalconf.getoption('image_1', 'rows')
-                cols=self.globalconf.getoption('image-1','cols')
+                cols=self.globalconf.getoption('image_1','cols')
                 if rows==None or cols==None:
                     return None
+                rows=int(rows)
+                cols=int(cols)
                 xLeftBottom = int(data[0,0,i,3]*cols)
                 yLeftBottom = int(data[0, 0, i, 4]*rows)
                 xRightTop = int(data[0,0,i,5]*cols)
@@ -134,10 +142,10 @@ class MyApplication(BaseApplication):
                 xRightTop_ = int(widthFactor*xRightTop)
                 yRightTop_ = int(heightFactor*yRightTop)
 
-                cv2.rectangle(img,(xLeftBottom_, yLeftBottom_),(xRightTop_, yRightTop_))
+                cv2.rectangle(img,(xLeftBottom_, yLeftBottom_),(xRightTop_, yRightTop_),(0, 255, 0), 2)
 
                 if class_id in classNames:
-                    label = classNames[class_id]+"： "+str(confidence)
+                    label = classNames[class_id]+": "+str(confidence)
                     lablelist.append((label, [xLeftBottom_, yLeftBottom_, xRightTop_, yRightTop_]))
 
                     labelSize, baseLine = cv2.getTextSize(label, cv2.FONT_HERSHEY_TRIPLEX, 0.8, 1)

@@ -6,3 +6,367 @@ infer process start succeed
 infer process start succeed
 [2020-12-04 13:39:51] _internal.py[line:113] INFO 2961  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 [2020-12-04 13:39:51] CaffeOpencvApp.py[line:89] INFO 2994 infer process start succeed
+[2020-12-04 16:00:39] _internal.py[line:113] INFO 4915  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-12-04 16:00:39] CaffeOpencvApp.py[line:90] INFO 4948 infer process start succeed
+[2020-12-04 16:02:26] _internal.py[line:113] INFO 5007  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-12-04 16:02:26] CaffeOpencvApp.py[line:90] INFO 5040 infer process start succeed
+[2020-12-04 16:09:55] _internal.py[line:113] INFO 5198  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-12-04 16:09:55] CaffeOpencvApp.py[line:90] INFO 5231 infer process start succeed
+[2020-12-04 16:12:07] MyServer.py[line:20] INFO 5198 Hello World!
+[2020-12-04 16:12:07] _internal.py[line:113] INFO 5198 127.0.0.1 - - [04/Dec/2020 16:12:07] "[37mGET /helloworld HTTP/1.1[0m" 200 -
+[2020-12-04 16:12:07] _internal.py[line:113] INFO 5198 127.0.0.1 - - [04/Dec/2020 16:12:07] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+[2020-12-04 16:12:44] MyServer.py[line:34] INFO 5198 get data message, the data keys: dict_keys(['input', 'uuid', 'loadmodel', 'image_1'])
+[2020-12-04 16:12:44] CaffeOpencvApp.py[line:94] INFO 5231 load modelfile: ('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 16:12:44] CaffeOpencvApp.py[line:100] INFO 5231 model has load('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 16:12:45] MyServer.py[line:39] INFO 5198 model online success
+[2020-12-04 16:12:45] _internal.py[line:113] INFO 5198 127.0.0.1 - - [04/Dec/2020 16:12:45] "[37mPOST /online HTTP/1.1[0m" 200 -
+[2020-12-04 16:36:08] MyServer.py[line:62] INFO 5198 get data: uuid: dadasdsadas;input: image:1 
+[2020-12-04 16:36:32] MyServer.py[line:62] INFO 5198 get data: uuid: dadasdsadas;input: image:1 
+[2020-12-04 16:38:08] app.py[line:1892] ERROR 5198 Exception on /postdata [POST]
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/root/MyApp/MyServer.py", line 79, in postdata
+    processdata=APPqueuedict.recvdata(uuid)
+  File "/root/MyApp/MessageQueue.py", line 134, in recvdata
+    returndata= self.queuedict[uuid].get()
+  File "<string>", line 2, in get
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/managers.py", line 757, in _callmethod
+    kind, result = conn.recv()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 407, in _recv_bytes
+    buf = self._recv(4)
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 383, in _recv
+    raise EOFError
+EOFError
+[2020-12-04 16:38:08] _internal.py[line:113] INFO 5198 127.0.0.1 - - [04/Dec/2020 16:38:08] "[35m[1mPOST /postdata HTTP/1.1[0m" 500 -
+[2020-12-04 16:38:08] app.py[line:1892] ERROR 5198 Exception on /postdata [POST]
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/root/MyApp/MyServer.py", line 79, in postdata
+    processdata=APPqueuedict.recvdata(uuid)
+  File "/root/MyApp/MessageQueue.py", line 134, in recvdata
+    returndata= self.queuedict[uuid].get()
+  File "<string>", line 2, in get
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/managers.py", line 757, in _callmethod
+    kind, result = conn.recv()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 407, in _recv_bytes
+    buf = self._recv(4)
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 383, in _recv
+    raise EOFError
+EOFError
+[2020-12-04 16:38:08] _internal.py[line:113] INFO 5198 127.0.0.1 - - [04/Dec/2020 16:38:08] "[35m[1mPOST /postdata HTTP/1.1[0m" 500 -
+[2020-12-04 16:38:11] _internal.py[line:113] INFO 5697  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-12-04 16:38:11] CaffeOpencvApp.py[line:90] INFO 5753 infer process start succeed
+[2020-12-04 16:38:16] MyServer.py[line:34] INFO 5697 get data message, the data keys: dict_keys(['input', 'uuid', 'loadmodel', 'image_1'])
+[2020-12-04 16:38:16] CaffeOpencvApp.py[line:94] INFO 5753 load modelfile: ('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 16:38:16] CaffeOpencvApp.py[line:100] INFO 5753 model has load('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 16:38:17] MyServer.py[line:39] INFO 5697 model online success
+[2020-12-04 16:38:17] _internal.py[line:113] INFO 5697 127.0.0.1 - - [04/Dec/2020 16:38:17] "[37mPOST /online HTTP/1.1[0m" 200 -
+[2020-12-04 16:38:23] MyServer.py[line:62] INFO 5697 get data: uuid: dadasdsadas;input: image:1 
+[2020-12-04 16:40:37] app.py[line:1892] ERROR 5697 Exception on /postdata [POST]
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/root/MyApp/MyServer.py", line 79, in postdata
+    processdata=APPqueuedict.recvdata(uuid)
+  File "/root/MyApp/MessageQueue.py", line 134, in recvdata
+    returndata= self.queuedict[uuid].get()
+  File "<string>", line 2, in get
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/managers.py", line 757, in _callmethod
+    kind, result = conn.recv()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 407, in _recv_bytes
+    buf = self._recv(4)
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 383, in _recv
+    raise EOFError
+EOFError
+[2020-12-04 16:42:35] _internal.py[line:113] INFO 5908  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-12-04 16:42:35] CaffeOpencvApp.py[line:90] INFO 5942 infer process start succeed
+[2020-12-04 16:43:50] MyServer.py[line:34] INFO 5908 get data message, the data keys: dict_keys(['input', 'uuid', 'loadmodel', 'image_1'])
+[2020-12-04 16:43:50] CaffeOpencvApp.py[line:94] INFO 5942 load modelfile: ('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 16:43:50] CaffeOpencvApp.py[line:100] INFO 5942 model has load('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 16:43:51] MyServer.py[line:39] INFO 5908 model online success
+[2020-12-04 16:43:51] _internal.py[line:113] INFO 5908 127.0.0.1 - - [04/Dec/2020 16:43:51] "[37mPOST /online HTTP/1.1[0m" 200 -
+[2020-12-04 16:43:57] MyServer.py[line:62] INFO 5908 get data: uuid: dadasdsadas;input: image:1 
+[2020-12-04 16:44:42] app.py[line:1892] ERROR 5908 Exception on /postdata [POST]
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/root/MyApp/MyServer.py", line 79, in postdata
+    processdata=APPqueuedict.recvdata(uuid)
+  File "/root/MyApp/MessageQueue.py", line 134, in recvdata
+    returndata= self.queuedict[uuid].get()
+  File "<string>", line 2, in get
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/managers.py", line 757, in _callmethod
+    kind, result = conn.recv()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 407, in _recv_bytes
+    buf = self._recv(4)
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 383, in _recv
+    raise EOFError
+EOFError
+[2020-12-04 16:44:44] _internal.py[line:113] INFO 6071  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-12-04 16:44:44] CaffeOpencvApp.py[line:90] INFO 6122 infer process start succeed
+[2020-12-04 16:44:49] MyServer.py[line:34] INFO 6071 get data message, the data keys: dict_keys(['input', 'uuid', 'loadmodel', 'image_1'])
+[2020-12-04 16:44:49] CaffeOpencvApp.py[line:94] INFO 6122 load modelfile: ('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 16:44:49] CaffeOpencvApp.py[line:100] INFO 6122 model has load('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 16:44:50] MyServer.py[line:39] INFO 6071 model online success
+[2020-12-04 16:44:50] _internal.py[line:113] INFO 6071 127.0.0.1 - - [04/Dec/2020 16:44:50] "[37mPOST /online HTTP/1.1[0m" 200 -
+[2020-12-04 16:44:52] MyServer.py[line:62] INFO 6071 get data: uuid: dadasdsadas;input: image:1 
+[2020-12-04 16:53:06] app.py[line:1892] ERROR 6071 Exception on /postdata [POST]
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/root/MyApp/MyServer.py", line 79, in postdata
+    processdata=APPqueuedict.recvdata(uuid)
+  File "/root/MyApp/MessageQueue.py", line 134, in recvdata
+    returndata= self.queuedict[uuid].get()
+  File "<string>", line 2, in get
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/managers.py", line 757, in _callmethod
+    kind, result = conn.recv()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 407, in _recv_bytes
+    buf = self._recv(4)
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 383, in _recv
+    raise EOFError
+EOFError
+[2020-12-04 16:53:06] _internal.py[line:113] INFO 6071 127.0.0.1 - - [04/Dec/2020 16:53:06] "[35m[1mPOST /postdata HTTP/1.1[0m" 500 -
+[2020-12-04 16:53:08] _internal.py[line:113] INFO 6254  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-12-04 16:53:08] CaffeOpencvApp.py[line:90] INFO 6287 infer process start succeed
+[2020-12-04 16:53:23] MyServer.py[line:34] INFO 6254 get data message, the data keys: dict_keys(['input', 'uuid', 'loadmodel', 'image_1'])
+[2020-12-04 16:53:23] CaffeOpencvApp.py[line:94] INFO 6287 load modelfile: ('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 16:53:23] CaffeOpencvApp.py[line:100] INFO 6287 model has load('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 16:53:24] MyServer.py[line:39] INFO 6254 model online success
+[2020-12-04 16:53:24] _internal.py[line:113] INFO 6254 127.0.0.1 - - [04/Dec/2020 16:53:24] "[37mPOST /online HTTP/1.1[0m" 200 -
+[2020-12-04 16:53:26] MyServer.py[line:62] INFO 6254 get data: uuid: dadasdsadas;input: image:1 
+[2020-12-04 18:40:08] app.py[line:1892] ERROR 6254 Exception on /postdata [POST]
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/root/MyApp/MyServer.py", line 79, in postdata
+    processdata=APPqueuedict.recvdata(uuid)
+  File "/root/MyApp/MessageQueue.py", line 134, in recvdata
+    returndata= self.queuedict[uuid].get()
+  File "<string>", line 2, in get
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/managers.py", line 757, in _callmethod
+    kind, result = conn.recv()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 407, in _recv_bytes
+    buf = self._recv(4)
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 383, in _recv
+    raise EOFError
+EOFError
+[2020-12-04 18:40:10] _internal.py[line:113] INFO 7046  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-12-04 18:40:10] CaffeOpencvApp.py[line:90] INFO 7079 infer process start succeed
+[2020-12-04 18:40:59] MyServer.py[line:62] INFO 7046 get data: uuid: dadasdsadas;input: image:1 
+[2020-12-04 18:41:23] MyServer.py[line:34] INFO 7046 get data message, the data keys: dict_keys(['input', 'uuid', 'loadmodel', 'image_1'])
+[2020-12-04 18:41:23] CaffeOpencvApp.py[line:94] INFO 7079 load modelfile: ('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 18:41:23] CaffeOpencvApp.py[line:100] INFO 7079 model has load('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 18:41:24] MyServer.py[line:39] INFO 7046 model online success
+[2020-12-04 18:41:24] _internal.py[line:113] INFO 7046 127.0.0.1 - - [04/Dec/2020 18:41:24] "[37mPOST /online HTTP/1.1[0m" 200 -
+[2020-12-04 18:41:28] MyServer.py[line:62] INFO 7046 get data: uuid: dadasdsadas;input: image:1 
+[2020-12-04 19:07:13] app.py[line:1892] ERROR 7046 Exception on /postdata [POST]
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/root/MyApp/MyServer.py", line 79, in postdata
+    processdata=APPqueuedict.recvdata(uuid)
+  File "/root/MyApp/MessageQueue.py", line 134, in recvdata
+    returndata= self.queuedict[uuid].get()
+  File "<string>", line 2, in get
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/managers.py", line 757, in _callmethod
+    kind, result = conn.recv()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 407, in _recv_bytes
+    buf = self._recv(4)
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 383, in _recv
+    raise EOFError
+EOFError
+[2020-12-04 19:07:16] _internal.py[line:113] INFO 7430  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-12-04 19:07:16] CaffeOpencvApp.py[line:90] INFO 7463 infer process start succeed
+[2020-12-04 19:07:23] MyServer.py[line:34] INFO 7430 get data message, the data keys: dict_keys(['input', 'uuid', 'loadmodel', 'image_1'])
+[2020-12-04 19:07:23] CaffeOpencvApp.py[line:94] INFO 7463 load modelfile: ('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 19:07:23] CaffeOpencvApp.py[line:100] INFO 7463 model has load('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 19:07:24] MyServer.py[line:39] INFO 7430 model online success
+[2020-12-04 19:07:24] _internal.py[line:113] INFO 7430 127.0.0.1 - - [04/Dec/2020 19:07:24] "[37mPOST /online HTTP/1.1[0m" 200 -
+[2020-12-04 19:07:26] MyServer.py[line:62] INFO 7430 get data: uuid: dadasdsadas;input: image:1 
+[2020-12-04 19:07:35] app.py[line:1892] ERROR 7430 Exception on /postdata [POST]
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/root/MyApp/MyServer.py", line 79, in postdata
+    processdata=APPqueuedict.recvdata(uuid)
+  File "/root/MyApp/MessageQueue.py", line 134, in recvdata
+    returndata= self.queuedict[uuid].get()
+  File "<string>", line 2, in get
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/managers.py", line 757, in _callmethod
+    kind, result = conn.recv()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 407, in _recv_bytes
+    buf = self._recv(4)
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 383, in _recv
+    raise EOFError
+EOFError
+[2020-12-04 19:07:35] _internal.py[line:113] INFO 7430 127.0.0.1 - - [04/Dec/2020 19:07:35] "[35m[1mPOST /postdata HTTP/1.1[0m" 500 -
+[2020-12-04 19:08:25] _internal.py[line:113] INFO 7619  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-12-04 19:08:26] CaffeOpencvApp.py[line:90] INFO 7816 infer process start succeed
+[2020-12-04 19:09:10] MyServer.py[line:34] INFO 7619 get data message, the data keys: dict_keys(['input', 'uuid', 'loadmodel', 'image_1'])
+[2020-12-04 19:09:10] CaffeOpencvApp.py[line:94] INFO 7816 load modelfile: ('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 19:09:10] CaffeOpencvApp.py[line:100] INFO 7816 model has load('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 19:09:11] MyServer.py[line:39] INFO 7619 model online success
+[2020-12-04 19:09:11] _internal.py[line:113] INFO 7619 127.0.0.1 - - [04/Dec/2020 19:09:11] "[37mPOST /online HTTP/1.1[0m" 200 -
+[2020-12-04 19:09:13] MyServer.py[line:62] INFO 7619 get data: uuid: dadasdsadas;input: image:1 
+[2020-12-04 19:19:50] _internal.py[line:113] INFO 8195  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-12-04 19:19:50] CaffeOpencvApp.py[line:90] INFO 8229 infer process start succeed
+[2020-12-04 19:19:54] MyServer.py[line:34] INFO 8195 get data message, the data keys: dict_keys(['input', 'uuid', 'loadmodel', 'image_1'])
+[2020-12-04 19:19:54] CaffeOpencvApp.py[line:94] INFO 8229 load modelfile: ('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 19:19:54] CaffeOpencvApp.py[line:100] INFO 8229 model has load('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 19:19:55] MyServer.py[line:39] INFO 8195 model online success
+[2020-12-04 19:19:55] _internal.py[line:113] INFO 8195 127.0.0.1 - - [04/Dec/2020 19:19:55] "[37mPOST /online HTTP/1.1[0m" 200 -
+[2020-12-04 19:19:57] MyServer.py[line:62] INFO 8195 get data: uuid: dadasdsadas;input: image:1 
+[2020-12-04 19:25:18] app.py[line:1892] ERROR 8195 Exception on /postdata [POST]
+Traceback (most recent call last):
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/root/anaconda3/envs/py3/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/root/MyApp/MyServer.py", line 79, in postdata
+    processdata=APPqueuedict.recvdata(uuid)
+  File "/root/MyApp/MessageQueue.py", line 133, in recvdata
+    return None
+  File "<string>", line 2, in get
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/managers.py", line 757, in _callmethod
+    kind, result = conn.recv()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 250, in recv
+    buf = self._recv_bytes()
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 407, in _recv_bytes
+    buf = self._recv(4)
+  File "/root/anaconda3/envs/py3/lib/python3.6/multiprocessing/connection.py", line 383, in _recv
+    raise EOFError
+EOFError
+[2020-12-04 19:25:20] _internal.py[line:113] INFO 8491  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-12-04 19:25:20] CaffeOpencvApp.py[line:90] INFO 8524 infer process start succeed
+[2020-12-04 19:25:34] MyServer.py[line:34] INFO 8491 get data message, the data keys: dict_keys(['input', 'uuid', 'loadmodel', 'image_1'])
+[2020-12-04 19:25:34] CaffeOpencvApp.py[line:94] INFO 8524 load modelfile: ('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 19:25:34] CaffeOpencvApp.py[line:100] INFO 8524 model has load('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 19:25:35] MyServer.py[line:39] INFO 8491 model online success
+[2020-12-04 19:25:35] _internal.py[line:113] INFO 8491 127.0.0.1 - - [04/Dec/2020 19:25:35] "[37mPOST /online HTTP/1.1[0m" 200 -
+[2020-12-04 19:25:38] MyServer.py[line:62] INFO 8491 get data: uuid: dadasdsadas;input: image:1 
+[2020-12-04 19:25:39] _internal.py[line:113] INFO 8491 127.0.0.1 - - [04/Dec/2020 19:25:39] "[37mPOST /postdata HTTP/1.1[0m" 200 -
+[2020-12-04 19:54:58] _internal.py[line:113] INFO 9235  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-12-04 19:54:58] CaffeOpencvApp.py[line:90] INFO 9268 infer process start succeed
+[2020-12-04 19:55:15] MyServer.py[line:34] INFO 9235 get data message, the data keys: dict_keys(['input', 'uuid', 'loadmodel', 'image_1'])
+[2020-12-04 19:55:15] CaffeOpencvApp.py[line:94] INFO 9268 load modelfile: ('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 19:55:15] CaffeOpencvApp.py[line:100] INFO 9268 model has load('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 19:55:16] MyServer.py[line:39] INFO 9235 model online success
+[2020-12-04 19:55:16] _internal.py[line:113] INFO 9235 127.0.0.1 - - [04/Dec/2020 19:55:16] "[37mPOST /online HTTP/1.1[0m" 200 -
+[2020-12-04 19:55:20] MyServer.py[line:62] INFO 9235 get data: uuid: dadasdsadas;input: image:1 
+[2020-12-04 19:55:20] _internal.py[line:113] INFO 9235 127.0.0.1 - - [04/Dec/2020 19:55:20] "[37mPOST /postdata HTTP/1.1[0m" 200 -
+[2020-12-04 19:55:50] _internal.py[line:113] INFO 9407  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+[2020-12-04 19:55:50] CaffeOpencvApp.py[line:90] INFO 9440 infer process start succeed
+[2020-12-04 19:55:54] MyServer.py[line:34] INFO 9407 get data message, the data keys: dict_keys(['input', 'uuid', 'loadmodel', 'image_1'])
+[2020-12-04 19:55:54] CaffeOpencvApp.py[line:94] INFO 9440 load modelfile: ('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 19:55:54] CaffeOpencvApp.py[line:100] INFO 9440 model has load('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
+[2020-12-04 19:55:55] MyServer.py[line:39] INFO 9407 model online success
+[2020-12-04 19:55:55] _internal.py[line:113] INFO 9407 127.0.0.1 - - [04/Dec/2020 19:55:55] "[37mPOST /online HTTP/1.1[0m" 200 -
+[2020-12-04 19:55:56] MyServer.py[line:62] INFO 9407 get data: uuid: dadasdsadas;input: image:1 
+[2020-12-04 19:55:57] _internal.py[line:113] INFO 9407 127.0.0.1 - - [04/Dec/2020 19:55:57] "[37mPOST /postdata HTTP/1.1[0m" 200 -
