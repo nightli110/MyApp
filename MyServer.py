@@ -61,15 +61,15 @@ def postdata():
         else:
             logger.info("get data: "+logdata)
         inputnamelist=getinputname(data["input"])
-        # for key in inputnamelist.keys():
-        #     if inputnamelist[key]=="image"   :
-        #         data[key]=base64toimageCV(inputnamelist[key])
-        # if not modelinnet():
-        #     return nomodelerror()
+        for key in inputnamelist.keys():
+            if inputnamelist[key]=="image"   :
+                data[key]=base64toimageCV(inputnamelist[key])
+        if not modelinnet():
+            return nomodelerror()
         uuid= data["uuid"]
         addsuccess=APPqueuedict.addqueue(uuid)
-        img=cv2.imread('dog.jpg')
-        data['img']=img
+        # img=cv2.imread('dog.jpg')
+        # data['img']=img
         if addsuccess==None:
             return jsonerrorcode(20002)
         addsuccess=APPMessagelist.addmsg(data)

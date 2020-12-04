@@ -104,9 +104,9 @@ class MyApplication(BaseApplication):
                     time.sleep(1)
                     proceuuid=APPMessagelist.msgqueue.get()
                     message=APPMessagelist.msgdict[proceuuid]
-                    netinput=self.advanceproc(message['img'])
+                    netinput=self.advanceproc(message['image_1'])
                     netoutput=self.inferdata(netinput)
-                    resultdata=self.resultsproc(netoutput, message['img'])
+                    resultdata=self.resultsproc(netoutput, message['image_1'])
                     # cv2.imwrite('test.jpg', resultdata['image_1'])
                     message['result']=resultdata
                     outputsuccess=APPMessagelist.prodmsgadd(message)
