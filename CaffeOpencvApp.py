@@ -93,7 +93,6 @@ class MyApplication(BaseApplication):
             time.sleep(1)
             modelfile=self.loadlabel.get()
             self.logger.info("load modelfile: "+str(modelfile))
-            #modelfile=('modelweight/MobileNetSSD_deploy.prototxt', 'modelweight/MobileNetSSD_deploy.caffemodel')
             for i in modelfile:
                 if not os.path.exists(i):
                     self.logger.error("model weight not exit")

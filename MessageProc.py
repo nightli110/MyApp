@@ -16,7 +16,7 @@ def getinputname(strinput):
             print('the input is irregular')
             return None
         name_len= int(name_pair[1])
-        for i in range(0, name_len):
+        for i in range(1, name_len+1):
             temp_name=name_pair[0]+'_'+str(i)
             input_name[temp_name]=name_pair[0]
     return input_name

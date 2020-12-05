@@ -8,6 +8,9 @@ import io
 
 #base64code to opencv image format
 def base64toimageCV(b64code):
+    missing_padding = 4 - len(b64code) % 4
+    if missing_padding:
+        b64code += '='* missing_padding
     image_b64decode=base64.b64decode(b64code)
     img_array = np.fromstring(image_b64decode, np.uint8)
     img = cv2.imdecode(img_array, cv2.COLOR_BGR2RGB)

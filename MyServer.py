@@ -63,9 +63,9 @@ def postdata():
         inputnamelist=getinputname(data["input"])
         for key in inputnamelist.keys():
             if inputnamelist[key]=="image"   :
-                data[key]=base64toimageCV(inputnamelist[key])
-        if not modelinnet():
-            return nomodelerror()
+                data[key]=base64toimageCV(data[key])
+        if not application.Isloadmodel():
+            return jsonerrorcode(30001)
         uuid= data["uuid"]
         addsuccess=APPqueuedict.addqueue(uuid)
         # img=cv2.imread('dog.jpg')
