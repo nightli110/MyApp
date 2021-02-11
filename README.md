@@ -49,7 +49,4 @@ infer进程为推理进程:
 
 
 
-中二解释:
-六道中的畜生道，能像通灵出各种通灵兽
-
 开发过程的问题可以参考:  http://www.styxhelix.life/categories/MYAPP%E5%BC%80%E5%8F%91/
